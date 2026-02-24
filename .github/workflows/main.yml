@@ -9,4 +9,4 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: lazy-actions/gitrivy@v4
+      - uses: lazy-actions/gitrivy@v3
