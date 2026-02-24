@@ -1,0 +1,38 @@
+name: NuGet Audit and Create PR
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Weekly on Sunday
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0'
+
+      - name: Run NuGet Audit
+        id: audit
+        run: |
+          dotnet list package --vulnerable > audit-results.txt 2>&1
+          cat audit-results.txt
+          if grep -q "Critical\|High" audit-results.txt; then
+            echo "vulnerabilities_found=true" >> $GITHUB_OUTPUT
+          else
+            echo "vulnerabilities_found=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create PR if vulnerabilities found
+        if: steps.audit.outputs.vulnerabilities_found == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'chore: NuGet audit - vulnerabilities detected'
+          title: 'NuGet Audit: Vulnerabilities Detected'
+          body-path: audit-results.txt
+          branch: nuget-audit-fix
+          delete-branch: true
