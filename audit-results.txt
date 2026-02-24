@@ -1,0 +1,22 @@
+  Determining projects to restore...
+/home/runner/work/VulnerableProjects/VulnerableProjects/ConsoleAppWithVulnerableLibrary/ConsoleAppWithVulnerableLibrary.csproj : warning NU1903: Package 'Newtonsoft.Json' 12.0.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr [/home/runner/work/VulnerableProjects/VulnerableProjects/test_repos.sln]
+/home/runner/work/VulnerableProjects/VulnerableProjects/VulnerableConsoleApp/VulnerableConsoleApp.csproj : warning NU1903: Package 'Newtonsoft.Json' 12.0.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr [/home/runner/work/VulnerableProjects/VulnerableProjects/test_repos.sln]
+/home/runner/work/VulnerableProjects/VulnerableProjects/VulnerableLibrary/VulnerableLibrary.csproj : warning NU1903: Package 'Newtonsoft.Json' 12.0.3 has a known high severity vulnerability, https://github.com/advisories/GHSA-5crp-9r3c-p9vr [/home/runner/work/VulnerableProjects/VulnerableProjects/test_repos.sln]
+  Restored /home/runner/work/VulnerableProjects/VulnerableProjects/ConsoleAppWithVulnerableLibrary/ConsoleAppWithVulnerableLibrary.csproj (in 662 ms).
+  Restored /home/runner/work/VulnerableProjects/VulnerableProjects/VulnerableLibrary/VulnerableLibrary.csproj (in 662 ms).
+  Restored /home/runner/work/VulnerableProjects/VulnerableProjects/VulnerableConsoleApp/VulnerableConsoleApp.csproj (in 662 ms).
+
+The following sources were used:
+   https://api.nuget.org/v3/index.json
+
+Project `VulnerableConsoleApp` has the following vulnerable packages
+   [net10.0]: 
+   Top-level Package      Requested   Resolved   Severity   Advisory URL                                     
+   > Newtonsoft.Json      12.0.3      12.0.3     High       https://github.com/advisories/GHSA-5crp-9r3c-p9vr
+
+Project `VulnerableLibrary` has the following vulnerable packages
+   [net10.0]: 
+   Top-level Package      Requested   Resolved   Severity   Advisory URL                                     
+   > Newtonsoft.Json      12.0.3      12.0.3     High       https://github.com/advisories/GHSA-5crp-9r3c-p9vr
+
+The given project `ConsoleAppWithVulnerableLibrary` has no vulnerable packages given the current sources.
