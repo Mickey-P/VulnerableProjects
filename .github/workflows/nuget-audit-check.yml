@@ -27,6 +27,12 @@ jobs:
           cat audit-results.txt
           if grep -q "Critical\|High" audit-results.txt; then
             echo "vulnerabilities_found=true" >> $GITHUB_OUTPUT
+            # Capture audit results for PR body
+            {
+              echo 'audit_output<<EOF'
+              cat audit-results.txt
+              echo 'EOF'
+            } >> $GITHUB_OUTPUT
           else
             echo "vulnerabilities_found=false" >> $GITHUB_OUTPUT
           fi
@@ -37,6 +43,6 @@ jobs:
         with:
           commit-message: 'chore: NuGet audit - vulnerabilities detected'
           title: 'NuGet Audit: Vulnerabilities Detected'
-          body-path: audit-results.txt
+          body: ${{ steps.audit.outputs.audit_output }}
           branch: nuget-audit-fix
           delete-branch: true
