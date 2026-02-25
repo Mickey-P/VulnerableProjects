@@ -1,4 +1,4 @@
-name: Gitrivy GitHub Issue and Trivy Action
+name: Trivy Action
 
 on:
   schedule:
@@ -9,4 +9,20 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: lazy-actions/gitrivy@v3
+      - uses: actions/checkout@v4
+
+      - name: Build ConsoleAppWithVulnerableLibrary image
+        run: docker build -f Dockerfile.ConsoleAppWithVulnerableLibrary -t app1 .
+
+      - name: Build VulnerableConsoleApp image
+        run: docker build -f Dockerfile.VulnerableConsoleApp -t app2 .
+
+      - name: Scan app1 with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'app1'
+
+      - name: Scan app2 with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'app2'
