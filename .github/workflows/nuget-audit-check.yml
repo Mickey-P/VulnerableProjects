@@ -33,7 +33,7 @@ jobs:
 
       - name: Create PR if vulnerabilities found
         if: steps.audit.outputs.vulnerabilities_found == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'chore: NuGet audit - vulnerabilities detected'
           title: 'NuGet Audit: Vulnerabilities Detected'
